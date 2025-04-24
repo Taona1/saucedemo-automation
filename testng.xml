@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="SauceDemoTestSuite" parallel="methods" thread-count="2">
+    <test name="SauceDemoTests">
+        <classes>
+            <class name="SauceLabs.FirstTest"/>
+        </classes>
+    </test>
+</suite>
