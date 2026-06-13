@@ -43,10 +43,12 @@ public class DashboardPage {
     }
 
     public void addBackpackToCart() {
+        wait.until(ExpectedConditions.urlContains("inventory"));
         wait.until(ExpectedConditions.elementToBeClickable(addBackpackButton)).click();
     }
 
     public void addBikeLightToCart() {
+        wait.until(ExpectedConditions.urlContains("inventory"));
         wait.until(ExpectedConditions.elementToBeClickable(addBikeLightButton)).click();
     }
 
