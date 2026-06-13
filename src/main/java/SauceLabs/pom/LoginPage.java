@@ -43,7 +43,12 @@ public class LoginPage {
     }
 
     public boolean isLoginSuccessful() {
-        return driver.getCurrentUrl().contains("inventory.html");
+        try {
+            wait.until(ExpectedConditions.urlContains("inventory.html"));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public String getErrorMessage() {

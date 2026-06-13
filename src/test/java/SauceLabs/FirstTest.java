@@ -108,7 +108,7 @@ public class FirstTest extends BaseTest {
         checkoutPage.enterPostalCode("12345");
         checkoutPage.clickContinueButton();
         checkoutPage.clickFinishButton();
-        assertFalse(checkoutPage.isCheckoutSuccessful(), "Checkout not successful: Success message not displayed");
+        assertTrue(checkoutPage.isCheckoutSuccessful(), "Checkout not successful: Success message not displayed");
     }
 
     @Test
@@ -149,7 +149,7 @@ public class FirstTest extends BaseTest {
 
         // Finish checkout
         checkoutPage.clickFinishButton();
-        assertFalse(checkoutPage.isCheckoutSuccessful(), "Checkout not successful");
+        assertTrue(checkoutPage.isCheckoutSuccessful(), "Checkout not successful");
 
         // Logout
         logoutPage.clickMenuButton();
