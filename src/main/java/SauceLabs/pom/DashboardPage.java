@@ -47,16 +47,20 @@ public class DashboardPage {
     public void addBackpackToCart() {
         wait.until(ExpectedConditions.urlContains("inventory"));
         wait.until(ExpectedConditions.elementToBeClickable(By.id("add-to-cart-sauce-labs-backpack"))).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("remove-sauce-labs-backpack")));
     }
 
     public void addBikeLightToCart() {
         wait.until(ExpectedConditions.urlContains("inventory"));
         wait.until(ExpectedConditions.elementToBeClickable(By.id("add-to-cart-sauce-labs-bike-light"))).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("remove-sauce-labs-bike-light")));
     }
 
     public int getCartItemCount() {
         try {
-            return Integer.parseInt(wait.until(ExpectedConditions.visibilityOf(cartBadge)).getText());
+            return Integer.parseInt(
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("shopping_cart_badge"))).getText()
+            );
         } catch (Exception e) {
             return 0;
         }
