@@ -1,6 +1,7 @@
 package SauceLabs.pom;
 
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,20 +35,24 @@ public class CartPage {
     }
 
     public int getCartItemCount() {
-        return wait.until(ExpectedConditions.visibilityOfAllElements(cartItems)).size();
+        wait.until(ExpectedConditions.urlContains("cart.html"));
+        return driver.findElements(By.className("cart_item")).size();
     }
 
     public List<String> getItemNames() {
-        return wait.until(ExpectedConditions.visibilityOfAllElements(itemNames))
+        return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
+                By.cssSelector(".cart_item .inventory_item_name")))
                 .stream().map(WebElement::getText).toList();
     }
 
     public List<String> getItemPrices() {
-        return wait.until(ExpectedConditions.visibilityOfAllElements(itemPrices))
+        return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
+                By.cssSelector(".cart_item .inventory_item_price")))
                 .stream().map(WebElement::getText).toList();
     }
 
     public void clickCheckoutButton() {
+        wait.until(ExpectedConditions.urlContains("cart.html"));
         wait.until(ExpectedConditions.elementToBeClickable(checkoutButton)).click();
     }
 }

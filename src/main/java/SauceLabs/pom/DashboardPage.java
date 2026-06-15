@@ -62,5 +62,6 @@ public class DashboardPage {
 
     public void clickShoppingCartIcon() {
         wait.until(ExpectedConditions.elementToBeClickable(cartLink)).click();
+        wait.until(ExpectedConditions.urlContains("cart.html"));
     }
 }
