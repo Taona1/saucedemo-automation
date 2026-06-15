@@ -46,13 +46,15 @@ public class DashboardPage {
 
     public void addBackpackToCart() {
         wait.until(ExpectedConditions.urlContains("inventory"));
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("add-to-cart-sauce-labs-backpack"))).click();
+        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(By.id("add-to-cart-sauce-labs-backpack")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("remove-sauce-labs-backpack")));
     }
 
     public void addBikeLightToCart() {
         wait.until(ExpectedConditions.urlContains("inventory"));
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("add-to-cart-sauce-labs-bike-light"))).click();
+        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(By.id("add-to-cart-sauce-labs-bike-light")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("remove-sauce-labs-bike-light")));
     }
 
