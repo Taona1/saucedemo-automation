@@ -2,6 +2,7 @@ package SauceLabs.pom;
 
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -53,6 +54,8 @@ public class CartPage {
 
     public void clickCheckoutButton() {
         wait.until(ExpectedConditions.urlContains("cart.html"));
-        wait.until(ExpectedConditions.elementToBeClickable(checkoutButton)).click();
+        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(By.id("checkout")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
+        wait.until(ExpectedConditions.urlContains("checkout-step-one.html"));
     }
 }

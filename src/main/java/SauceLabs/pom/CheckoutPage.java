@@ -1,6 +1,8 @@
 package SauceLabs.pom;
 
 import lombok.Getter;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -56,11 +58,15 @@ public class CheckoutPage {
     }
 
     public void clickContinueButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(continueButton)).click();
+        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(By.id("continue")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
+        wait.until(ExpectedConditions.urlContains("checkout-step-two.html"));
     }
 
     public void clickFinishButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(finishButton)).click();
+        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(By.id("finish")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
+        wait.until(ExpectedConditions.urlContains("checkout-complete.html"));
     }
 
     public String getItemTotal() {
