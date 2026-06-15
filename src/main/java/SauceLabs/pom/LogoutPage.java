@@ -1,6 +1,8 @@
 package SauceLabs.pom;
 
 import lombok.Getter;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,14 +33,18 @@ public class LogoutPage {
     }
 
     public void clickMenuButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
+        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(By.id("react-burger-menu-btn")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("logout_sidebar_link")));
     }
 
     public void clickLogoutButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
+        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(By.id("logout_sidebar_link")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-button")));
     }
 
     public boolean isLoggedOut() {
-        return wait.until(ExpectedConditions.visibilityOf(loginButton)).isDisplayed();
+        return driver.findElement(By.id("login-button")).isDisplayed();
     }
 }

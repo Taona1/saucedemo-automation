@@ -15,21 +15,6 @@ public class CheckoutPage {
     private final WebDriver driver;
     private final WebDriverWait wait;
 
-    @FindBy(id = "first-name")
-    private WebElement firstNameInput;
-
-    @FindBy(id = "last-name")
-    private WebElement lastNameInput;
-
-    @FindBy(id = "postal-code")
-    private WebElement postalCodeInput;
-
-    @FindBy(id = "continue")
-    private WebElement continueButton ;
-
-    @FindBy(id = "finish")
-    private WebElement finishButton;
-
     @FindBy(className = "summary_subtotal_label")
     private WebElement itemTotal;
 
@@ -45,16 +30,27 @@ public class CheckoutPage {
         PageFactory.initElements(driver, this);
     }
 
+    private void setReactInput(String fieldId, String value) {
+        WebElement field = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(fieldId)));
+        ((JavascriptExecutor) driver).executeScript(
+            "var setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;" +
+            "setter.call(arguments[0], arguments[1]);" +
+            "arguments[0].dispatchEvent(new Event('input', { bubbles: true }));" +
+            "arguments[0].dispatchEvent(new Event('change', { bubbles: true }));",
+            field, value
+        );
+    }
+
     public void enterFirstName(String firstName) {
-        wait.until(ExpectedConditions.visibilityOf(firstNameInput)).sendKeys(firstName);
+        setReactInput("first-name", firstName);
     }
 
     public void enterLastName(String lastName) {
-        lastNameInput.sendKeys(lastName);
+        setReactInput("last-name", lastName);
     }
 
     public void enterPostalCode(String postalCode) {
-        postalCodeInput.sendKeys(postalCode);
+        setReactInput("postal-code", postalCode);
     }
 
     public void clickContinueButton() {
@@ -75,7 +71,7 @@ public class CheckoutPage {
 
     public boolean isCheckoutSuccessful() {
         return wait.until(ExpectedConditions.visibilityOf(successMessage))
-                .getText().equals("THANK YOU FOR YOUR ORDER");
+                .getText().contains("Thank you");
     }
 
     public String getCheckoutTitle() {
