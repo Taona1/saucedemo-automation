@@ -46,7 +46,7 @@ public class BaseTest {
         options.addArguments("--disable-gpu");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
         // Create test instance for Extent Reports

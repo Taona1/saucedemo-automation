@@ -1,6 +1,8 @@
 package SauceLabs.pom;
 
 import lombok.Getter;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,12 +46,12 @@ public class DashboardPage {
 
     public void addBackpackToCart() {
         wait.until(ExpectedConditions.urlContains("inventory"));
-        wait.until(ExpectedConditions.elementToBeClickable(addBackpackButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("add-to-cart-sauce-labs-backpack"))).click();
     }
 
     public void addBikeLightToCart() {
         wait.until(ExpectedConditions.urlContains("inventory"));
-        wait.until(ExpectedConditions.elementToBeClickable(addBikeLightButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("add-to-cart-sauce-labs-bike-light"))).click();
     }
 
     public int getCartItemCount() {
@@ -61,7 +63,8 @@ public class DashboardPage {
     }
 
     public void clickShoppingCartIcon() {
-        wait.until(ExpectedConditions.elementToBeClickable(cartLink)).click();
+        WebElement cart = wait.until(ExpectedConditions.elementToBeClickable(By.className("shopping_cart_link")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", cart);
         wait.until(ExpectedConditions.urlContains("cart.html"));
     }
 }
